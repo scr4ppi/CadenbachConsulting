@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cadenbach Consulting begleitet Gründerinnen und Gründer von der ersten Idee über Finanzierung und Businessplan bis zur laufenden betriebswirtschaftlichen Beratung." />
+  <title>Cadenbach Consulting – Orientierung für Gründer</title>
+
+  <style>
+    :root {
+      --navy-950: #0C1726;
+      --navy-800: #253B59;
+      --blue-650: #4A678C;
+      --blue-250: #9CBCD9;
+      --paper: #F2F2F2;
+      --accent: #E30513;
+      --white: #ffffff;
+      --ink: #101722;
+      --muted: rgba(16, 23, 34, 0.68);
+      --muted-light: rgba(242, 242, 242, 0.76);
+      --line: rgba(37, 59, 89, 0.14);
+      --shadow-soft: 0 20px 60px rgba(12, 23, 38, 0.10);
+      --shadow-strong: 0 34px 90px rgba(12, 23, 38, 0.22);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --max: 1720px;
+      --pad: clamp(20px, 4vw, 76px);
+      --font-sans: "Mona Sans", "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Merriweather", Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 10%, rgba(156,188,217,0.30), transparent 32rem),
+        radial-gradient(circle at 88% 22%, rgba(74,103,140,0.13), transparent 36rem),
+        linear-gradient(180deg, #ffffff 0%, var(--paper) 42%, #e9eff4 100%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.38;
+      background-image:
+        linear-gradient(rgba(37,59,89,0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37,59,89,0.055) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 75%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    h1, h2, h3, p { margin-top: 0; }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 4px;
+      width: 0%;
+      z-index: 100;
+      background: linear-gradient(90deg, var(--accent), var(--blue-650), var(--blue-250));
+      box-shadow: 0 0 22px rgba(227,5,19,0.22);
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 90;
+      border-bottom: 1px solid transparent;
+      transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .site-header.scrolled {
+      background: rgba(242, 242, 242, 0.88);
+      border-color: rgba(37, 59, 89, 0.14);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 48px rgba(12,23,38,0.08);
+    }
+
+    .nav,
+    .wrap {
+      width: min(var(--max), calc(100% - (var(--pad) * 2)));
+      margin-inline: auto;
+    }
+
+    .nav {
+      min-height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 250px;
+      height: 100px;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 26px rgba(12,23,38,0.14));
+    }
+
+    .brand-wordmark {
+      color: var(--navy-800);
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: -0.052em;
+      line-height: 0.94;
+      font-size: clamp(1.02rem, 1.8vw, 1.32rem);
+    }
+
+    .brand-wordmark span {
+      display: block;
+      color: var(--blue-650);
+      font-size: 0.72em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(37,59,89,0.12);
+      background: rgba(255,255,255,0.72);
+    }
+
+    .nav-links a {
+      padding: 10px 15px;
+      border-radius: 999px;
+      color: rgba(12,23,38,0.72);
+      font-weight: 850;
+      font-size: 0.93rem;
+      transition: background 160ms ease, color 160ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--navy-950);
+      background: rgba(156,188,217,0.26);
+      outline: none;
+    }
+
+    .header-cta,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-weight: 950;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .header-cta {
+      min-height: 46px;
+      padding: 0 20px;
+      color: var(--paper);
+      background: var(--navy-950);
+      box-shadow: 0 14px 34px rgba(12,23,38,0.16);
+    }
+
+    .btn {
+      min-height: 56px;
+      padding: 0 24px;
+    }
+
+    .header-cta:hover,
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: white;
+      background: var(--accent);
+      box-shadow: 0 18px 40px rgba(227,5,19,0.20);
+    }
+
+    .btn-secondary {
+      color: var(--navy-950);
+      background: rgba(255,255,255,0.72);
+      border-color: rgba(37,59,89,0.14);
+    }
+
+    .mobile-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid rgba(37,59,89,0.16);
+      background: rgba(255,255,255,0.78);
+      color: var(--navy-950);
+      cursor: pointer;
+    }
+
+    .mobile-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      margin: 4px auto;
+      background: currentColor;
+      border-radius: 99px;
+    }
+
+    .hero {
+      min-height: 100svh;
+      padding: 132px 0 78px;
+      display: grid;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.06fr) minmax(420px, 0.94fr);
+      gap: clamp(36px, 6vw, 108px);
+      align-items: center;
+    }
+
+    .eyebrow,
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.78rem;
+      font-weight: 950;
+      color: var(--blue-650);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 13px;
+      border: 1px solid rgba(37,59,89,0.13);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.78);
+      box-shadow: 0 12px 32px rgba(12,23,38,0.06);
+    }
+
+    .eyebrow::before,
+    .kicker::before {
+      content: "";
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-right: 8px;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 8px solid var(--blue-650);
+    }
+
+    h1 {
+      max-width: 1120px;
+      margin: 24px 0 26px;
+      font-family: var(--font-serif);
+      font-size: clamp(3.2rem, 8.6vw, 8.5rem);
+      line-height: 0.9;
+      letter-spacing: -0.078em;
+      color: var(--navy-950);
+    }
+
+    .gradient-word {
+      color: transparent;
+      background: linear-gradient(96deg, var(--navy-950), var(--blue-650) 54%, var(--blue-250));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .hero-copy,
+    .section-text {
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: clamp(1.04rem, 1.45vw, 1.22rem);
+    }
+
+    .hero-copy { max-width: 790px; }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 650px;
+    }
+
+    .visual-card {
+      position: absolute;
+      inset: 0 0 auto auto;
+      width: min(100%, 620px);
+      height: 650px;
+      border-radius: 46px;
+      overflow: hidden;
+      background: var(--navy-800);
+      border: 1px solid rgba(37,59,89,0.13);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .visual-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.74;
+      filter: saturate(0.78) contrast(1.04);
+      transform: scale(1.03);
+    }
+
+    .visual-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(12,23,38,0.02), rgba(12,23,38,0.72)),
+        radial-gradient(circle at 22% 18%, rgba(156,188,217,0.42), transparent 28rem);
+    }
+
+    .compass-orbit {
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      left: 0;
+      top: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.84);
+      border: 1px solid rgba(37,59,89,0.13);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 24px 60px rgba(12,23,38,0.16);
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .compass-orbit::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: inherit;
+      border: 1px dashed rgba(74,103,140,0.35);
+      animation: spin 18s linear infinite;
+    }
+
+    .compass-orbit img {
+      width: 112px;
+      height: 112px;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+    }
+
+    .metric-card {
+      position: absolute;
+      left: 46px;
+      bottom: 42px;
+      width: min(86%, 460px);
+      padding: 26px;
+      border-radius: 30px;
+      background: rgba(12,23,38,0.92);
+      color: var(--paper);
+      border: 1px solid rgba(156,188,217,0.18);
+      box-shadow: 0 28px 64px rgba(12,23,38,0.28);
+    }
+
+    .metric-card strong {
+      display: block;
+      color: var(--blue-250);
+      font-size: clamp(3.1rem, 6vw, 6rem);
+      line-height: 0.86;
+      letter-spacing: -0.09em;
+      margin-bottom: 16px;
+    }
+
+    .metric-card span {
+      display: block;
+      color: var(--muted-light);
+      font-weight: 780;
+      line-height: 1.48;
+    }
+
+    .section {
+      padding: clamp(82px, 12vw, 150px) 0;
+      position: relative;
+    }
+
+    .section.white {
+      background: rgba(255,255,255,0.70);
+      border-top: 1px solid rgba(37,59,89,0.08);
+      border-bottom: 1px solid rgba(37,59,89,0.08);
+    }
+
+    .section.dark {
+      color: var(--paper);
+      background: var(--navy-950);
+      overflow: hidden;
+    }
+
+    .section.dark::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 14% 16%, rgba(156,188,217,0.14), transparent 28rem),
+        radial-gradient(circle at 92% 72%, rgba(74,103,140,0.20), transparent 34rem);
+    }
+
+    .section.dark > .wrap { position: relative; z-index: 1; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.52fr);
+      gap: clamp(28px, 5vw, 78px);
+      align-items: end;
+      margin-bottom: 48px;
+    }
+
+    .section.dark .kicker { color: var(--blue-250); }
+    .section.dark .kicker::before { border-left-color: var(--blue-250); }
+    .section.dark .section-text { color: var(--muted-light); }
+
+    h2 {
+      max-width: 1040px;
+      margin-bottom: 0;
+      font-family: var(--font-serif);
+      font-size: clamp(2.25rem, 5.1vw, 5.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+      color: inherit;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .service-card {
+      min-height: 330px;
+      padding: 30px;
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(37,59,89,0.11);
+      box-shadow: var(--shadow-soft);
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(74,103,140,0.32);
+      box-shadow: 0 28px 70px rgba(12,23,38,0.13);
+    }
+
+    .service-number {
+      display: inline-grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 38px;
+      border-radius: 16px;
+      color: var(--blue-650);
+      background: rgba(156,188,217,0.18);
+      font-weight: 950;
+    }
+
+    .service-card h3 {
+      margin-bottom: 14px;
+      color: var(--navy-950);
+      font-size: 1.42rem;
+      letter-spacing: -0.045em;
+    }
+
+    .service-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      line-height: 1.68;
+    }
+
+    .tabs-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.42fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .tab-buttons {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .tab-button {
+      text-align: left;
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(156,188,217,0.18);
+      background: rgba(255,255,255,0.055);
+      color: var(--paper);
+      cursor: pointer;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .tab-button:hover { transform: translateX(4px); }
+    .tab-button.active { background: rgba(156,188,217,0.16); border-color: rgba(156,188,217,0.44); }
+    .tab-button strong { display: block; margin-bottom: 7px; font-size: 1.06rem; }
+    .tab-button span { display: block; color: var(--muted-light); line-height: 1.45; font-size: 0.94rem; }
+
+    .tab-stage {
+      position: relative;
+      min-height: 540px;
+      overflow: hidden;
+      border-radius: 40px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(156,188,217,0.18);
+      box-shadow: 0 26px 72px rgba(0,0,0,0.20);
+    }
+
+    .tab-panel {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateY(18px) scale(0.985);
+      pointer-events: none;
+      transition: opacity 260ms ease, transform 260ms ease;
+    }
+
+    .tab-panel.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .tab-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.58;
+      filter: saturate(0.75) contrast(1.05);
+    }
+
+    .tab-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(12,23,38,0.95), rgba(12,23,38,0.42));
+    }
+
+    .tab-content {
+      position: absolute;
+      inset: auto auto 0 0;
+      z-index: 1;
+      width: min(760px, 100%);
+      padding: clamp(28px, 5vw, 62px);
+    }
+
+    .tab-content small {
+      color: var(--blue-250);
+      font-weight: 950;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .tab-content h3 {
+      margin: 16px 0 14px;
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4.2vw, 4.3rem);
+      line-height: 1;
+      letter-spacing: -0.064em;
+    }
+
+    .tab-content p {
+      margin-bottom: 0;
+      color: var(--muted-light);
+      line-height: 1.72;
+      font-size: 1.06rem;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.1fr);
+      gap: clamp(32px, 7vw, 92px);
+      align-items: start;
+    }
+
+    .showcase-sticky {
+      position: sticky;
+      top: 116px;
+      min-height: 560px;
+      overflow: hidden;
+      border-radius: 42px;
+      background: var(--navy-800);
+      border: 1px solid rgba(37,59,89,0.12);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .showcase-sticky img {
+      width: 100%;
+      height: 560px;
+      object-fit: cover;
+      opacity: 0.75;
+      transition: opacity 260ms ease, transform 420ms ease;
+      transform: scale(1.02);
+    }
+
+    .showcase-sticky.is-changing img {
+      opacity: 0.2;
+      transform: scale(1.08);
+    }
+
+    .showcase-label {
+      position: absolute;
+      inset: auto 22px 22px;
+      padding: 20px;
+      border-radius: 24px;
+      color: var(--paper);
+      background: rgba(12,23,38,0.80);
+      border: 1px solid rgba(156,188,217,0.22);
+      backdrop-filter: blur(16px);
+    }
+
+    .showcase-label strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .showcase-label span {
+      color: var(--muted-light);
+      line-height: 1.5;
+      font-size: 0.94rem;
+    }
+
+    .steps {
+      display: grid;
+      gap: 26px;
+    }
+
+    .step {
+      min-height: 280px;
+      padding: clamp(26px, 4vw, 42px);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(37,59,89,0.12);
+      background: rgba(255,255,255,0.92);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .step small {
+      color: var(--accent);
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .step h3 {
+      margin: 18px 0 12px;
+      font-size: clamp(1.65rem, 3vw, 2.6rem);
+      letter-spacing: -0.06em;
+      color: var(--navy-950);
+    }
+
+    .step p {
+      margin-bottom: 0;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 1.05rem;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.62fr);
+      gap: 28px;
+      padding: clamp(30px, 5vw, 58px);
+      border-radius: 48px;
+      color: var(--paper);
+      background:
+        radial-gradient(circle at 78% 18%, rgba(156,188,217,0.20), transparent 22rem),
+        linear-gradient(145deg, rgba(37,59,89,0.88), rgba(12,23,38,1));
+      border: 1px solid rgba(156,188,217,0.22);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .contact-panel p {
+      max-width: 680px;
+      margin: 24px 0 0;
+      color: var(--muted-light);
+      line-height: 1.72;
+      font-size: 1.08rem;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+      padding: 22px;
+      border-radius: 30px;
+      background: rgba(242,242,242,0.06);
+      border: 1px solid rgba(156,188,217,0.16);
+    }
+
+    .field {
+      width: 100%;
+      min-height: 52px;
+      padding: 0 16px;
+      border: 1px solid rgba(156,188,217,0.22);
+      border-radius: 16px;
+      background: rgba(12,23,38,0.56);
+      color: var(--paper);
+      outline: none;
+      font: inherit;
+    }
+
+    textarea.field {
+      min-height: 122px;
+      padding-top: 14px;
+      resize: vertical;
+    }
+
+    .field:focus {
+      border-color: var(--blue-250);
+      box-shadow: 0 0 0 4px rgba(156,188,217,0.12);
+    }
+
+    .form-note {
+      color: rgba(242,242,242,0.64);
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
+    .site-footer {
+      width: min(var(--max), calc(100% - (var(--pad) * 2)));
+      margin-inline: auto;
+      padding: 34px 0 54px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: rgba(12,23,38,0.58);
+      font-size: 0.92rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 620ms ease, transform 620ms ease;
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-18px) rotate(2deg); }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .section-head,
+      .tabs-layout,
+      .process-grid,
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual { min-height: 540px; }
+      .visual-card { left: 76px; width: auto; height: 540px; }
+      .service-grid { grid-template-columns: 1fr; }
+      .showcase-sticky { position: relative; top: auto; }
+    }
+
+    @media (max-width: 860px) {
+      .nav { min-height: 74px; }
+      .mobile-toggle { display: block; }
+      .header-cta { display: none; }
+      .nav-links {
+        position: absolute;
+        top: 80px;
+        left: var(--pad);
+        right: var(--pad);
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 24px;
+        padding: 12px;
+        background: rgba(242,242,242,0.96);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 20px 50px rgba(12,23,38,0.12);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { border-radius: 16px; padding: 14px 16px; }
+      .brand-wordmark { display: none; }
+      .hero { padding-top: 108px; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap,
+      .nav,
+      .site-footer { width: min(var(--max), calc(100% - 32px)); }
+      h1 { font-size: clamp(3rem, 17vw, 5.2rem); }
+      h2 { font-size: clamp(2.2rem, 12vw, 3.8rem); }
+      .hero-actions .btn { width: 100%; }
+      .hero-visual { min-height: 430px; }
+      .visual-card { left: 0; height: 430px; border-radius: 30px; }
+      .compass-orbit { width: 132px; height: 132px; top: 22px; }
+      .compass-orbit img { width: 74px; height: 74px; }
+      .metric-card { left: 14px; right: 14px; bottom: 14px; width: auto; padding: 20px; }
+      .section { padding: 74px 0; }
+      .tab-stage { min-height: 560px; border-radius: 30px; }
+      .showcase-sticky img { height: 380px; }
+      .service-card,
+      .step { min-height: auto; }
+      .contact-panel { border-radius: 30px; padding: 22px; }
+      .site-footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress" id="progress"></div>
+
+   <header class="site-header" id="siteHeader">
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a class="brand" href="#top" aria-label="Cadenbach Consulting Startseite">
+        <img class="brand-logo" src="assets/logobreit.png" alt="Cadenbach Consulting Logo" />
+   
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Navigation öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#prozess">Prozess</a>
+        <a href="#positionierung">Positionierung</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+
+      <a class="header-cta" href="#kontakt">Erstgespräch</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-content reveal">
+          <div class="eyebrow">Existenzgründung · Finanzierung · Klarheit</div>
+          <h1 id="hero-title">Orientierung für <span class="gradient-word">Gründer</span>, die sicher starten wollen.</h1>
+          <p class="hero-copy">Cadenbach Consulting begleitet Gründerinnen und Gründer von der ersten Geschäftsidee über Businessplan und Finanzierung bis zur laufenden betriebswirtschaftlichen Beratung.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#kontakt">Beratung anfragen</a>
+            <a class="btn btn-secondary" href="#prozess">Ablauf ansehen</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="Visuelle Markenfläche">
+          <div class="visual-card" data-parallax="0.10">
+            <img src="assets/normal.png" alt="Beratungssituation mit Gründungsunterlagen" />
+          </div>
+          <div class="compass-orbit" data-parallax="-0.13" aria-hidden="true">
+            <img src="assets/transparent.svg" alt="" />
+          </div>
+          <div class="metric-card" data-parallax="-0.06">
+            <strong>360°</strong>
+            <span>Strukturierte Begleitung von der Idee bis zum laufenden Geschäftsbetrieb.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" id="leistungen" aria-labelledby="leistungen-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">Leistungen</div>
+            <h2 id="leistungen-title">Beratung, die aus Ideen tragfähige Unternehmen macht.</h2>
+          </div>
+          <p class="section-text">Ein seriöser, klar geführter Auftritt: starke typografische Hierarchie, helle Flächen, dezente Markenfarben und klare Wege zu den relevanten Beratungsleistungen.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card reveal">
+            <div class="service-number">01</div>
+            <h3>Gründungsstrategie</h3>
+            <p>Validierung der Geschäftsidee, Zielgruppenverständnis, Angebotsstruktur und klare Priorisierung der nächsten Schritte.</p>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-number">02</div>
+            <h3>Businessplan & Finanzierung</h3>
+            <p>Professionelle Ausarbeitung von Konzept, Zahlenwerk, Finanzierungsbedarf und bankfähiger Argumentation.</p>
+          </article>
+          <article class="service-card reveal">
+            <div class="service-number">03</div>
+            <h3>Betriebswirtschaftliche Begleitung</h3>
+            <p>Kontinuierliche Beratung nach dem Start: Controlling, Liquiditätsplanung, Entscheidungsgrundlagen und Wachstum.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="beratung" aria-labelledby="beratung-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">Beratungsfokus</div>
+            <h2 id="beratung-title">Dynamische Bühne statt statischer Textwand.</h2>
+          </div>
+          <p class="section-text">Der Nutzer kann den Schwerpunkt wechseln. Bild, Headline und Text ändern sich direkt — sinnvoll für Leistungen, Case Studies oder Zielgruppen.</p>
+        </div>
+
+        <div class="tabs-layout reveal">
+          <div class="tab-buttons" role="tablist" aria-label="Beratungsfokus auswählen">
+            <button class="tab-button active" type="button" role="tab" aria-selected="true" data-tab="0">
+              <strong>Startklarheit</strong>
+              <span>Geschäftsidee, Zielgruppe und Angebotslogik präzisieren.</span>
+            </button>
+            <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab="1">
+              <strong>Zahlenklarheit</strong>
+              <span>Businessplan, Kapitalbedarf und Finanzierung belastbar vorbereiten.</span>
+            </button>
+            <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab="2">
+              <strong>Steuerung</strong>
+              <span>Nach dem Start Liquidität, Kennzahlen und Entscheidungen führen.</span>
+            </button>
+          </div>
+
+          <div class="tab-stage">
+            <article class="tab-panel active">
+              <img src="assets/focus-start.jpg" alt="Gründungsidee und Strategie entwickeln" />
+              <div class="tab-content">
+                <small>Fokus 01</small>
+                <h3>Strategische Orientierung.</h3>
+                <p>Aus Ideen werden klare Prioritäten, prüfbare Annahmen und ein nachvollziehbarer Gründungsfahrplan.</p>
+              </div>
+            </article>
+            <article class="tab-panel">
+              <img src="assets/focus-finance.jpg" alt="Finanzplanung und Businessplan" />
+              <div class="tab-content">
+                <small>Fokus 02</small>
+                <h3>Finanzielle Belastbarkeit.</h3>
+                <p>Zahlen werden als Entscheidungsinstrument genutzt: für Finanzierung, Liquidität und Risikoabschätzung.</p>
+              </div>
+            </article>
+            <article class="tab-panel">
+              <img src="assets/focus-control.jpg" alt="Unternehmerische Steuerung nach der Gründung" />
+              <div class="tab-content">
+                <small>Fokus 03</small>
+                <h3>Stabiler Geschäftsbetrieb.</h3>
+                <p>Nach der Gründung sorgen Kennzahlen, Auswertung und betriebswirtschaftliche Einordnung für Sicherheit.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="prozess" aria-labelledby="prozess-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">Scroll-Story</div>
+            <h2 id="prozess-title">Beim Scrollen verändert sich Bild und Fokus.</h2>
+          </div>
+          <p class="section-text">Die linke Bildfläche bleibt auf Desktop-Geräten stehen. Rechts wechseln die Prozessschritte. Das Bild, der Titel und der Kontext passen sich automatisch an.</p>
+        </div>
+
+        <div class="process-grid">
+          <aside class="showcase-sticky" aria-live="polite">
+            <img id="showcaseImage" src="assets/logo-cadenbach-icon.svg" alt="Gründungsidee strukturieren" />
+            <div class="showcase-label">
+              <strong id="showcaseTitle">Idee strukturieren</strong>
+              <span id="showcaseText">Aus einer Vision wird ein klares Beratungsziel.</span>
+            </div>
+          </aside>
+
+          <div class="steps">
+            <article class="step reveal" data-image="assets/Büro.png" data-title="Idee strukturieren" data-text="Aus einer Vision wird ein klares Beratungsziel.">
+              <small>Phase 01</small>
+              <h3>Ausgangslage verstehen.</h3>
+              <p>Im ersten Schritt werden Idee, Motivation, Marktumfeld und wirtschaftliche Annahmen präzise eingeordnet.</p>
+            </article>
+            <article class="step reveal" data-image="assets/beratung.png" data-title="Finanzierung sichern" data-text="Zahlenwerk, Kapitalbedarf und Argumentation werden belastbar.">
+              <small>Phase 02</small>
+              <h3>Finanzierung vorbereiten.</h3>
+              <p>Businessplan, Liquiditätsplanung und Finanzierungslogik werden verständlich und bankfähig aufbereitet.</p>
+            </article>
+            <article class="step reveal" data-image="assets/vertrag.png" data-title="Sicher starten" data-text="Die Gründung wird operativ und betriebswirtschaftlich begleitet.">
+              <small>Phase 03</small>
+              <h3>Start und Betrieb steuern.</h3>
+              <p>Nach der Gründung werden Kennzahlen, Liquidität und Entscheidungen regelmäßig überprüft.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt" aria-labelledby="kontakt-title">
+      <div class="wrap">
+        <div class="contact-panel reveal">
+          <div>
+            <div class="kicker">Kontakt</div>
+            <h2 id="kontakt-title">Bereit für den nächsten unternehmerischen Schritt?</h2>
+            <p>Nutzen Sie das Formular als Platzhalter für ein echtes Kontaktformular, eine Terminbuchung oder eine Verlinkung zu E-Mail, Telefon und Kalender.</p>
+          </div>
+
+          <form class="contact-form" onsubmit="event.preventDefault(); alert('Danke! Das Formular ist aktuell ein Frontend-Prototyp.');">
+            <input class="field" type="text" name="name" placeholder="Name" autocomplete="name" required />
+            <input class="field" type="email" name="email" placeholder="E-Mail" autocomplete="email" required />
+            <textarea class="field" name="message" placeholder="Worum geht es bei Ihrer Gründung?" required></textarea>
+            <button class="btn btn-primary" type="submit">Anfrage senden</button>
+            <div class="form-note">Für den Livebetrieb muss das Formular noch an ein Backend, ein Formular-Tool oder eine E-Mail-Lösung angebunden werden.</div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Cadenbach Consulting</span>
+    <span>Impressum · Datenschutz · Kontakt</span>
+  </footer>
+
+  <script>
+    const header = document.getElementById('siteHeader');
+    const progress = document.getElementById('progress');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+    const revealEls = document.querySelectorAll('.reveal');
+    const parallaxEls = document.querySelectorAll('[data-parallax]');
+    const showcase = document.querySelector('.showcase-sticky');
+    const showcaseImage = document.getElementById('showcaseImage');
+    const showcaseTitle = document.getElementById('showcaseTitle');
+    const showcaseText = document.getElementById('showcaseText');
+    const steps = document.querySelectorAll('.step');
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function updateHeaderAndProgress() {
+      header.classList.toggle('scrolled', window.scrollY > 24);
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+      progress.style.width = `${percent}%`;
+    }
+
+    function updateParallax() {
+      const y = window.scrollY;
+      parallaxEls.forEach((el) => {
+        const speed = Number(el.dataset.parallax || 0);
+        el.style.transform = `translate3d(0, ${y * speed}px, 0)`;
+      });
+    }
+
+    window.addEventListener('scroll', () => {
+      updateHeaderAndProgress();
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) updateParallax();
+    }, { passive: true });
+
+    updateHeaderAndProgress();
+    updateParallax();
+
+    mobileToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      mobileToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach((el, index) => {
+      el.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
+      revealObserver.observe(el);
+    });
+
+    function setShowcase(step) {
+      if (!step || !showcaseImage) return;
+      const nextImage = step.dataset.image;
+      const nextTitle = step.dataset.title;
+      const nextText = step.dataset.text;
+
+      if (showcaseImage.getAttribute('src') === nextImage) return;
+
+      showcase.classList.add('is-changing');
+      setTimeout(() => {
+        showcaseImage.src = nextImage;
+        showcaseImage.alt = nextTitle;
+        showcaseTitle.textContent = nextTitle;
+        showcaseText.textContent = nextText;
+        showcase.classList.remove('is-changing');
+      }, 180);
+    }
+
+    const stepObserver = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setShowcase(visible.target);
+    }, {
+      rootMargin: '-30% 0px -40% 0px',
+      threshold: [0.2, 0.45, 0.7]
+    });
+
+    steps.forEach((step) => stepObserver.observe(step));
+
+    tabButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const index = Number(button.dataset.tab);
+        tabButtons.forEach((btn, i) => {
+          const active = i === index;
+          btn.classList.toggle('active', active);
+          btn.setAttribute('aria-selected', String(active));
+        });
+        tabPanels.forEach((panel, i) => panel.classList.toggle('active', i === index));
+      });
+    });
+  </script>
+</body>
+</html>
