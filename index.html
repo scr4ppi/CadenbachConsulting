@@ -660,19 +660,28 @@
       font-size: 0.94rem;
     }
 
+    /* ... (vorheriger CSS Code) ... */
+
     .steps {
       display: grid;
-      gap: 26px;
+      gap: 160px; /* Erhöhter Abstand für den Scroll-Weg */
+      padding-top: 5vh;
+      padding-bottom: 15vh;
     }
 
     .step {
-      min-height: 280px;
-      padding: clamp(26px, 4vw, 42px);
+      min-height: 280px; /* Deutlich höher für mehr Raum */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(32px, 4vw, 48px);
       border-radius: var(--radius-xl);
       border: 1px solid rgba(37,59,89,0.12);
       background: rgba(255,255,255,0.92);
       box-shadow: var(--shadow-soft);
     }
+
+    /* ... (restlicher CSS Code) ... */
 
     .step small {
       color: var(--accent);
