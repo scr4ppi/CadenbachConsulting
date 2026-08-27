@@ -458,7 +458,6 @@
       color: inherit;
     }
 
-    /* Angepasst auf ein dynamisches Grid für 3 oder 4 Elemente */
     .service-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -861,61 +860,55 @@
         scroll-behavior: auto !important;
         transition-duration: 0.001ms !important;
       }
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Strikte Nutzung der CD-Farbpalette für den Dunkelmodus */
-    --paper: #0C1726; /* Sekundärfarbe sehr dunkel */
-    --ink: #F2F2F2; /* Sekundärfarbe hell für Texte */
-    --muted: #9CBCD9; /* Primärfarbe hell für Sekundärtexte */
-    --muted-light: #F2F2F2;
-    --line: rgba(156, 188, 217, 0.2); /* Abgeleitet von der Primärfarbe #9CBCD9 */
-  }
+    } /* Fehler behoben: Geschlossene Klammer eingefügt */
 
-  /* Helle Flächen durch die CD-Primärfarbe #253B59 ersetzen */
-  .site-header.scrolled,
-  .nav-links,
-  .btn-secondary,
-  .mobile-toggle,
-  .eyebrow,
-  .compass-orbit,
-  .section.white,
-  .service-card,
-  .step {
-    background: #253B59; 
-    border-color: var(--line);
-  }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #0C1726; 
+        --ink: #F2F2F2; 
+        --muted: #9CBCD9; 
+        --muted-light: #F2F2F2;
+        --line: rgba(156, 188, 217, 0.2); 
+      }
 
-  /* Kontrast für Texte auf den neuen dunklen Flächen sichern (AA-Vorgabe) */
-  .nav-links a,
-  .btn-secondary,
-  .mobile-toggle,
-  .service-card h3,
-  .step h3,
-  h1, h2,
-  .brand-wordmark {
-    color: #F2F2F2;
-  }
+      .site-header.scrolled,
+      .nav-links,
+      .btn-secondary,
+      .mobile-toggle,
+      .eyebrow,
+      .compass-orbit,
+      .section.white,
+      .service-card,
+      .step {
+        background: #253B59; 
+        border-color: var(--line);
+      }
 
-  .nav-links a:hover,
-  .nav-links a:focus-visible {
-    background: rgba(156, 188, 217, 0.2); /* #9CBCD9 transparent */
-    color: #ffffff;
-  }
+      .nav-links a,
+      .btn-secondary,
+      .mobile-toggle,
+      .service-card h3,
+      .step h3,
+      h1, h2,
+      .brand-wordmark {
+        color: #F2F2F2;
+      }
 
-  /* Logo-Regel laut CD: Auf dunklen Flächen muss die weiße Negativ-Variante stehen. 
-     Dieser Filter färbt das Standardlogo per CSS weiß ein. */
-  .brand-logo {
-    filter: brightness(0) invert(1);
-  }
+      .nav-links a:hover,
+      .nav-links a:focus-visible {
+        background: rgba(156, 188, 217, 0.2); 
+        color: #ffffff;
+      }
 
-  /* Farbverlauf der Headline an den dunklen Grund anpassen */
-  .gradient-word {
-    background: linear-gradient(96deg, #F2F2F2, #9CBCD9 54%, #4A678C);
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
-}
-    
+      .brand-logo {
+        filter: brightness(0) invert(1);
+      }
+
+      .gradient-word {
+        background: linear-gradient(96deg, #F2F2F2, #9CBCD9 54%, #4A678C);
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
     }
   </style>
 </head>
@@ -1231,17 +1224,17 @@
         showcaseTitle.textContent = nextTitle;
         showcaseText.textContent = nextText;
         showcase.classList.remove('is-changing');
-      }, 200);
+      }, 180);
     }
 
     const stepObserver = new IntersectionObserver((entries) => {
-      const visible = entries.find((entry) => entry.isIntersecting);
-      if (visible) {
-        setShowcase(visible.target);
-      }
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setShowcase(visible.target);
     }, {
-      rootMargin: '-40% 0px -40% 0px',
-      threshold: 0
+      rootMargin: '-30% 0px -40% 0px',
+      threshold: [0.2, 0.45, 0.7]
     });
 
     steps.forEach((step) => stepObserver.observe(step));
