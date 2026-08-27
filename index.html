@@ -861,19 +861,17 @@
         scroll-behavior: auto !important;
         transition-duration: 0.001ms !important;
       }
-
-      @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --paper: #0C1726;
-    --ink: #F2F2F2;
-    --white: #152438;
-    --muted: rgba(242, 242, 242, 0.72);
-    --line: rgba(156, 188, 217, 0.18);
-    --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.4);
-    --shadow-strong: 0 34px 90px rgba(0, 0, 0, 0.6);
+    /* Strikte Nutzung der CD-Farbpalette für den Dunkelmodus */
+    --paper: #0C1726; /* Sekundärfarbe sehr dunkel */
+    --ink: #F2F2F2; /* Sekundärfarbe hell für Texte */
+    --muted: #9CBCD9; /* Primärfarbe hell für Sekundärtexte */
+    --muted-light: #F2F2F2;
+    --line: rgba(156, 188, 217, 0.2); /* Abgeleitet von der Primärfarbe #9CBCD9 */
   }
 
-  /* Hartcodierte helle Flächen an den dunklen Modus anpassen */
+  /* Helle Flächen durch die CD-Primärfarbe #253B59 ersetzen */
   .site-header.scrolled,
   .nav-links,
   .btn-secondary,
@@ -883,32 +881,36 @@
   .section.white,
   .service-card,
   .step {
-    background: var(--white);
+    background: #253B59; 
     border-color: var(--line);
   }
 
-  /* Spezifische Text- und Linkfarben korrigieren */
+  /* Kontrast für Texte auf den neuen dunklen Flächen sichern (AA-Vorgabe) */
   .nav-links a,
   .btn-secondary,
-  .mobile-toggle {
-    color: var(--ink);
+  .mobile-toggle,
+  .service-card h3,
+  .step h3,
+  h1, h2,
+  .brand-wordmark {
+    color: #F2F2F2;
   }
 
   .nav-links a:hover,
   .nav-links a:focus-visible {
-    background: rgba(156, 188, 217, 0.2);
+    background: rgba(156, 188, 217, 0.2); /* #9CBCD9 transparent */
     color: #ffffff;
   }
 
-  .service-card h3,
-  .step h3,
-  h1 {
-    color: var(--ink);
+  /* Logo-Regel laut CD: Auf dunklen Flächen muss die weiße Negativ-Variante stehen. 
+     Dieser Filter färbt das Standardlogo per CSS weiß ein. */
+  .brand-logo {
+    filter: brightness(0) invert(1);
   }
 
-  /* Lesbarkeit des Gradienten auf dunklem Grund optimieren */
+  /* Farbverlauf der Headline an den dunklen Grund anpassen */
   .gradient-word {
-    background: linear-gradient(96deg, #ffffff, var(--blue-250) 54%, var(--blue-650));
+    background: linear-gradient(96deg, #F2F2F2, #9CBCD9 54%, #4A678C);
     -webkit-background-clip: text;
     background-clip: text;
   }
