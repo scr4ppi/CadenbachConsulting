@@ -458,10 +458,11 @@
       color: inherit;
     }
 
+    /* 4-Spalten 2x2 Grid Anpassung */
     .service-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
     }
 
     .service-card {
@@ -660,17 +661,15 @@
       font-size: 0.94rem;
     }
 
-    /* ... (vorheriger CSS Code) ... */
-
     .steps {
       display: grid;
-      gap: 160px; /* Erhöhter Abstand für den Scroll-Weg */
+      gap: 160px;
       padding-top: 5vh;
       padding-bottom: 15vh;
     }
 
     .step {
-      min-height: 280px; /* Deutlich höher für mehr Raum */
+      min-height: 280px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -680,8 +679,6 @@
       background: rgba(255,255,255,0.92);
       box-shadow: var(--shadow-soft);
     }
-
-    /* ... (restlicher CSS Code) ... */
 
     .step small {
       color: var(--accent);
@@ -875,7 +872,6 @@
     <nav class="nav" aria-label="Hauptnavigation">
       <a class="brand" href="#top" aria-label="Cadenbach Consulting Startseite">
         <img class="brand-logo" src="assets/logobreit.png" alt="Cadenbach Consulting Logo" />
-   
       </a>
 
       <button class="mobile-toggle" id="mobileToggle" aria-label="Navigation öffnen" aria-expanded="false">
@@ -935,40 +931,25 @@
           <article class="service-card reveal">
             <div class="service-number">01</div>
             <h3>Begleitung</h3>
-            <p>Mit den Begleitungen möchte ich als betriebsfremde und nicht im Alltag feststeckende Person Ihnen durch ein Meeting einmal pro Monat frischen Wind in die Segel geben, und Blickwinkel zeigen, die Sie vielleicht übersehen. 
-Mit einer digitalen & kostengünstigeren Version, möchte ich Sie mit geringem Ressourceneinsatz  individuell und langfristig  beraten.
-Eine weitere intensivere Begleitung eignet sich besonders dann, wenn Sie ein Projekt starten oder sich tiefer in die betriebswirtschaftliche Materie einlasen wollen und eine engmaschigere Betreuung wünschen. 
-</p>
+            <p>Mit den Begleitungen möchte ich als betriebsfremde und nicht im Alltag feststeckende Person Ihnen durch ein Meeting einmal pro Monat frischen Wind in die Segel geben, und Blickwinkel zeigen, die Sie vielleicht übersehen. Mit einer digitalen & kostengünstigeren Version, möchte ich Sie mit geringem Ressourceneinsatz individuell und langfristig beraten. Eine weitere intensivere Begleitung eignet sich besonders dann, wenn Sie ein Projekt starten oder sich tiefer in die betriebswirtschaftliche Materie einlassen wollen und eine engmaschigere Betreuung wünschen.</p>
           </article>
+          
           <article class="service-card reveal">
             <div class="service-number">02</div>
             <h3>Gründungen</h3>
-            <p>Für Gründer habe ich ein breites Spektrum an förderfähigen Leistungen kreiert, um Sie auf dem so wichtigen Weg bestmöglich zu begleiten. 
-Die Erfahrung und das Know How von über 65 Gründungen gebe ich gerne an Sie weiter, damit Sie sich auf Ihren Aufbau konzentrieren und sich nicht mit Ängsten vor Fehlern beschäftigen müssen. 
-Von der Businessplanung, Begleitung bei der Finanzierung und zur Bank, über wertvolle Schulungen zum Thema Controlling oder Bewerbungsgespräche & Entlohnung. 
-Alles mit bis zu 50% (80% wenn Sie aus der Arbeitslosigkeit kommen) förderfähig!
-</p>
+            <p>Für Gründer habe ich ein breites Spektrum an förderfähigen Leistungen kreiert, um Sie auf dem so wichtigen Weg bestmöglich zu begleiten. Die Erfahrung und das Know How von über 65 Gründungen gebe ich gerne an Sie weiter, damit Sie sich auf Ihren Aufbau konzentrieren und sich nicht mit Ängsten vor Fehlern beschäftigen müssen. Von der Businessplanung, Begleitung bei der Finanzierung und zur Bank, über wertvolle Schulungen zum Thema Controlling oder Bewerbungsgespräche & Entlohnung. Alles mit bis zu 50% (80% wenn Sie aus der Arbeitslosigkeit kommen) förderfähig!</p>
           </article>
+          
           <article class="service-card reveal">
             <div class="service-number">03</div>
             <h3>Personal</h3>
-            <p>Für das Recruiting gebe ich Ihnen gerne tolle Netzwerkpartner an die Hand. 
-Mein Beratungsansatz zum Thema Personal liegt im Verständnis der Herausforderung und dem Bekämpfen des Personalmangels im eigenen Betrieb durch Schaffung von Nachhaltigen Strukturen und dem Aufbau einer Arbeitgebermarke (Employer Branding). 
-</p>
+            <p>Für das Recruiting gebe ich Ihnen gerne tolle Netzwerkpartner an die Hand. Mein Beratungsansatz zum Thema Personal liegt im Verständnis der Herausforderung und dem Bekämpfen des Personalmangels im eigenen Betrieb durch Schaffung von Nachhaltigen Strukturen und dem Aufbau einer Arbeitgebermarke (Employer Branding).</p>
           </article>
-        </div>
-      </div>
-
-                </article>
+          
           <article class="service-card reveal">
             <div class="service-number">04</div>
-            <h3>Betriebswirtschaft </h3>
-            <p>In der Betriebswirtschaft gibt es so viel zu wissen und zu beachten. Da verliert man schnell die Motivation sobald man vom Vokabular ausgeschlossen wird. 
-Mir ist es wichtig, dass Sie die sog. Basics kennen und anwenden können. 
-Es ist sinnvoll die Dokumente die Ihnen Ihr Steuerberater vorlegt, die von den Kassen, Banken oder anderen Instituten verlangt werden zu verstehen und zu interpretieren. 
-Kennzahlen können Ihre wichtigsten Werkzeuge in der Unternehmensführung werden, wenn Sie sie bilden und zuordnen können. Hier möchte ich ansetzen und Sie befähigen, genau dies zu tun. 
-
-</p>
+            <h3>Betriebswirtschaft</h3>
+            <p>In der Betriebswirtschaft gibt es so viel zu wissen und zu beachten. Da verliert man schnell die Motivation sobald man vom Vokabular ausgeschlossen wird. Mir ist es wichtig, dass Sie die sog. Basics kennen und anwenden können. Es ist sinnvoll die Dokumente die Ihnen Ihr Steuerberater vorlegt, die von den Kassen, Banken oder anderen Instituten verlangt werden zu verstehen und zu interpretieren. Kennzahlen können Ihre wichtigsten Werkzeuge in der Unternehmensführung werden, wenn Sie sie bilden und zuordnen können. Hier möchte ich ansetzen und Sie befähigen, genau dies zu tun.</p>
           </article>
         </div>
       </div>
