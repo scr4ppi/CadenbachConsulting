@@ -93,28 +93,34 @@
       transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
     }
 
-
-.site-header::before {
-  content: "";
-  position: absolute;
-  width: min(var(--max), calc(100% - (var(--pad) * 2)));
-  left: 50%;
-  bottom: 0;
-  transform: translate(-50%, 50%);
-  height: 26px;
-  background-image: url('image_d74de7.png');
-  background-repeat: no-repeat; /* Verhindert das mehrfache Kacheln */
-  background-position: center;
-  background-size: 100% 100%; /* Zieht das Bild exakt einmal über die volle Breite */
-  opacity: 0.5;
-  z-index: -1;
-  pointer-events: none;
-}
     .site-header.scrolled {
       background: rgba(242, 242, 242, 0.88);
       border-color: rgba(37, 59, 89, 0.14);
       backdrop-filter: blur(18px);
       box-shadow: 0 18px 48px rgba(12,23,38,0.08);
+    }
+
+    /* Schwebende Bilder auf der Kante des Headers */
+    .header-edge-img {
+      position: absolute;
+      bottom: 0;
+      transform: translateY(50%); /* Exakt hälftig auf der Kante */
+      width: 44px; /* Größe der Kreise */
+      height: 44px;
+      object-fit: contain;
+      z-index: 100;
+    }
+
+    .header-edge-img.left {
+      /* Richtet sich bündig am linken Rand der Navigation aus */
+      left: calc(50% - (min(var(--max), calc(100% - (var(--pad) * 2))) / 2));
+      transform: translate(-50%, 50%);
+    }
+
+    .header-edge-img.right {
+      /* Richtet sich bündig am rechten Rand der Navigation aus */
+      right: calc(50% - (min(var(--max), calc(100% - (var(--pad) * 2))) / 2));
+      transform: translate(50%, 50%);
     }
 
     .nav,
@@ -131,10 +137,9 @@
       gap: 22px;
     }
 
-    /* Logo so positionieren, dass es halb auf der Kante schwebt */
     .brand {
       display: inline-flex;
-      align-items: flex-start;
+      align-items: center; /* Logo wieder vertikal mittig */
       gap: 14px;
       min-width: 0;
       position: relative;
@@ -143,10 +148,10 @@
 
     .brand-logo {
       width: 250px;
-      height: 120px;
+      height: 80px; /* Normale Höhe innerhalb der Leiste */
       object-fit: contain;
-      transform: translateY(35px);
-      filter: drop-shadow(0 12px 26px rgba(12,23,38,0.18));
+      transform: none; /* Kein Versatz nach unten */
+      filter: drop-shadow(0 8px 20px rgba(12,23,38,0.12));
       transition: transform 220ms ease;
     }
 
@@ -369,18 +374,19 @@
 
     .compass-orbit {
       position: absolute;
-      width: 170px;
-      height: 170px;
-      left: 0;
-      top: 54px;
+      width: clamp(220px, 20vw, 320px);
+      aspect-ratio: 1; 
+      height: auto;
+      left: -60px; 
+      top: 15%; 
       display: grid;
       place-items: center;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.84);
-      border: 1px solid rgba(37,59,89,0.13);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 24px 60px rgba(12,23,38,0.16);
+      background: #ffffff;
+      border: 1px solid rgba(37,59,89,0.08);
+      box-shadow: 0 34px 90px rgba(12, 23, 38, 0.18);
       animation: float 7s ease-in-out infinite;
+      z-index: 5;
+      padding: clamp(20px, 3vw, 40px);
     }
 
     .compass-orbit::before {
@@ -435,6 +441,19 @@
       border-bottom: 1px solid rgba(37,59,89,0.08);
     }
 
+    #verantwortung.section {
+      padding: clamp(90px, 13vw, 160px) 0;
+    }
+
+    #verantwortung .section-head {
+      margin-bottom: 0;
+      display: block;
+    }
+
+    #verantwortung h2 {
+      margin-bottom: 24px;
+    }
+
     .section.dark {
       color: var(--paper);
       background: var(--navy-950);
@@ -477,7 +496,7 @@
 
     .service-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 24px;
     }
 
@@ -524,8 +543,8 @@
 
     .tabs-layout {
       display: grid;
-      grid-template-columns: minmax(240px, 0.32fr) minmax(0, 1fr);
-      gap: 20px;
+      grid-template-columns: minmax(280px, 0.42fr) minmax(0, 1fr);
+      gap: 26px;
       align-items: stretch;
     }
 
@@ -593,7 +612,7 @@
 
     .tab-content {
       position: absolute;
-      inset: 0 0 auto 0;
+      inset: auto auto 0 0;
       z-index: 1;
       width: min(760px, 100%);
       padding: clamp(28px, 5vw, 62px);
@@ -612,7 +631,6 @@
       font-size: clamp(2rem, 4.2vw, 4.3rem);
       line-height: 1;
       letter-spacing: -0.064em;
-      color: var(--white);
     }
 
     .tab-content p {
@@ -848,8 +866,6 @@
       .nav-links a { border-radius: 16px; padding: 14px 16px; }
       .brand-wordmark { display: none; }
       .hero { padding-top: 108px; }
-      /* Angepasster Abstand des Logos im mobilen Menü */
-      .brand-logo { transform: translateY(15px); } 
     }
 
     @media (max-width: 640px) {
@@ -861,8 +877,7 @@
       .hero-actions .btn { width: 100%; }
       .hero-visual { min-height: 430px; }
       .visual-card { left: 0; height: 430px; border-radius: 30px; }
-      .compass-orbit { width: 132px; height: 132px; top: 22px; }
-      .compass-orbit img { width: 74px; height: 74px; }
+      .compass-orbit { width: 160px; aspect-ratio: 1; top: -10px; left: 10px; padding: 18px; }
       .metric-card { left: 14px; right: 14px; bottom: 14px; width: auto; padding: 20px; }
       .section { padding: 74px 0; }
       .tab-stage { min-height: 560px; border-radius: 30px; }
@@ -889,11 +904,6 @@
         --muted: #9CBCD9; 
         --muted-light: #F2F2F2;
         --line: rgba(156, 188, 217, 0.2); 
-      }
-
-      /* Das Background-Pattern im Dark-Mode anpassen (weiß färben und abdimmen) */
-      .site-header::before {
-        filter: invert(1) opacity(0.3); 
       }
 
       .site-header.scrolled,
@@ -925,7 +935,9 @@
         color: #ffffff;
       }
 
+      /* Logo, schwebende Kreise und Hauptlogo für Dark Mode invertieren */
       .brand-logo,
+      .header-edge-img,
       .compass-orbit img {
         filter: brightness(0) invert(1);
       }
@@ -943,7 +955,7 @@
       }
 
       .header-cta:hover {
-        background: var(--white);
+        background: #ffffff;
         color: var(--navy-950);
       }
     }
@@ -954,9 +966,13 @@
   <div class="progress" id="progress"></div>
 
   <header class="site-header" id="siteHeader">
+    <!-- Die beiden kleinen Kreise auf der unteren Abschlusskante -->
+    <img class="header-edge-img left" src="assets/Bild PNG Farbe.png" alt="" aria-hidden="true" />
+    <img class="header-edge-img right" src="assets/Bild PNG Farbe.png" alt="" aria-hidden="true" />
+    
     <nav class="nav" aria-label="Hauptnavigation">
       <a class="brand" href="#top" aria-label="Cadenbach Consulting Startseite">
-        <img class="brand-logo" src="assets/PNG Farbe.png" alt="Cadenbach Consulting Logo" />
+        <img class="brand-logo" src="assets/logobreit.png" alt="Cadenbach Consulting Logo" />
       </a>
 
       <button class="mobile-toggle" id="mobileToggle" aria-label="Navigation öffnen" aria-expanded="false">
@@ -979,8 +995,8 @@
       <div class="wrap hero-grid">
         <div class="hero-content reveal">
           <div class="eyebrow">Existenzgründung · Finanzierung · Klarheit</div>
-          <h1 id="hero-title">Beratung für ambulante Pflegedienste. <span class="gradient-word">Fair und Transparent.</span></h1>
-          <p class="hero-copy">Cadenbach Consulting begleitet Gründerinnen und Gründer von der ersten Geschäftsidee über Businessplan und Finanzierung bis zur laufenden betriebswirtschaftlichen Beratung. Unternehmensführung, Personalführung, Betriebswirtschaft oder Allgemeine Themen, ich berate Sie gerne zu Ihrem Anliegen.</p>
+          <h1 id="hero-title">Beratung für ambulante <span class="gradient-word">Pflegedienste. </span>, Fair und Transparent.</h1>
+          <p class="hero-copy">Unternehmensführung, Personalführung, Betriebswirtschaft oder Allgemeine Themen, ich berate Sie gerne zu Ihrem Anliegen.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#kontakt">Beratung anfragen</a>
             <a class="btn btn-secondary" href="#prozess">Ablauf ansehen</a>
@@ -991,9 +1007,11 @@
           <div class="visual-card" data-parallax="0.10">
             <img src="assets/normal.png" alt="Beratungssituation mit Gründungsunterlagen" />
           </div>
+          
           <div class="compass-orbit" data-parallax="-0.13" aria-hidden="true">
-            <img src="assets/Bild PNG Farbe.png" alt="" />
+            <img src="assets/transparent.svg" alt="" />
           </div>
+          
           <div class="metric-card" data-parallax="-0.06">
             <strong>360°</strong>
             <span>Strukturierte Begleitung von der Idee bis zum laufenden Geschäftsbetrieb.</span>
@@ -1007,34 +1025,34 @@
         <div class="section-head reveal">
           <div>
             <div class="kicker">Leistungen</div>
-            <h2 id="leistungen-title">Ein breites Spektrum an förderfähigen Leistungen.</h2>
+            <h2 id="leistungen-title">Beratung, die aus Ideen tragfähige Unternehmen macht.</h2>
           </div>
-          <p class="section-text">Für Gründer habe ich ein breites Spektrum an förderfähigen Leistungen kreiert, um Sie auf dem so wichtigen Weg bestmöglich zu begleiten.</p>
+          <p class="section-text">Ein seriöser, klar geführter Auftritt: starke typografische Hierarchie, helle Flächen, dezente Markenfarben und klare Wege zu den relevanten Beratungsleistungen.</p>
         </div>
 
         <div class="service-grid">
           <article class="service-card reveal">
             <div class="service-number">01</div>
             <h3>Begleitung</h3>
-            <p>Mit den Begleitungen möchte ich als betriebsfremde und nicht im Alltag feststeckende Person Ihnen durch ein Meeting einmal pro Monat frischen Wind in die Segel geben, und Blickwinkel zeigen, die Sie vielleicht übersehen. Mit einer digitalen & kostengünstigeren Version, möchte ich Sie mit geringem Ressourceneinsatz individuell und langfristig beraten.</p>
+            <p>Mit den Begleitungen möchte ich als betriebsfremde und nicht im Alltag feststeckende Person Ihnen durch ein Meeting einmal pro Monat frischen Wind in die Segel geben, und Blickwinkel zeigen, die Sie vielleicht übersehen. Mit einer digitalen & kostengünstigeren Version, möchte ich Sie mit geringem Ressourceneinsatz individuell und langfristig beraten. Eine weitere intensivere Begleitung eignet sich besonders dann, wenn Sie ein Projekt starten oder sich tiefer in die betriebswirtschaftliche Materie einlassen wollen und eine engmaschigere Betreuung wünschen.</p>
           </article>
           
           <article class="service-card reveal">
             <div class="service-number">02</div>
             <h3>Gründungen</h3>
-            <p>Die Erfahrung und das Know How von über 65 Gründungen gebe ich gerne an Sie weiter. Von der Businessplanung, Begleitung bei der Finanzierung bis zu Schulungen. Alles mit bis zu 50% (80% aus der Arbeitslosigkeit) förderfähig!</p>
+            <p>Für Gründer habe ich ein breites Spektrum an förderfähigen Leistungen kreiert, um Sie auf dem so wichtigen Weg bestmöglich zu begleiten. Die Erfahrung und das Know How von über 65 Gründungen gebe ich gerne an Sie weiter, damit Sie sich auf Ihren Aufbau konzentrieren und sich nicht mit Ängsten vor Fehlern beschäftigen müssen. Von der Businessplanung, Begleitung bei der Finanzierung und zur Bank, über wertvolle Schulungen zum Thema Controlling oder Bewerbungsgespräche & Entlohnung. Alles mit bis zu 50% (80% wenn Sie aus der Arbeitslosigkeit kommen) förderfähig!</p>
           </article>
           
           <article class="service-card reveal">
             <div class="service-number">03</div>
             <h3>Personal</h3>
-            <p>Netzwerkpartner fürs Recruiting und das Bekämpfen des Personalmangels im eigenen Betrieb durch Schaffung von nachhaltigen Strukturen und dem Aufbau einer Arbeitgebermarke (Employer Branding).</p>
+            <p>Für das Recruiting gebe ich Ihnen gerne tolle Netzwerkpartner an die Hand. Mein Beratungsansatz zum Thema Personal liegt im Verständnis der Herausforderung und dem Bekämpfen des Personalmangels im eigenen Betrieb durch Schaffung von Nachhaltigen Strukturen und dem Aufbau einer Arbeitgebermarke (Employer Branding).</p>
           </article>
           
           <article class="service-card reveal">
             <div class="service-number">04</div>
             <h3>Betriebswirtschaft</h3>
-            <p>Mir ist es wichtig, dass Sie die Basics kennen und anwenden können. Dokumente von Kassen und Banken verstehen und Kennzahlen als wichtigste Werkzeuge in der Unternehmensführung nutzen.</p>
+            <p>In der Betriebswirtschaft gibt es so viel zu wissen und zu beachten. Da verliert man schnell die Motivation sobald man vom Vokabular ausgeschlossen wird. Mir ist es wichtig, dass Sie die sog. Basics kennen und anwenden können. Es ist sinnvoll die Dokumente die Ihnen Ihr Steuerberater vorlegt, die von den Kassen, Banken oder anderen Instituten verlangt werden zu verstehen und zu interpretieren. Kennzahlen können Ihre wichtigsten Werkzeuge in der Unternehmensführung werden, wenn Sie sie bilden und zuordnen können. Hier möchte ich ansetzen und Sie befähigen, genau dies zu tun.</p>
           </article>
         </div>
       </div>
@@ -1047,7 +1065,7 @@
             <div class="kicker">Beratungsfokus</div>
             <h2 id="beratung-title">Langfristige und nachhaltige Begleitung statt kurzfristiger Pflasterlösung</h2>
           </div>
-          <p class="section-text">Wählen Sie Ihren Schwerpunkt, um mehr über meine Beratungsansätze zu erfahren.</p>
+          <p class="section-text">Der Nutzer kann den Schwerpunkt wechseln. Bild, Headline und Text ändern sich direkt — sinnvoll für Leistungen, Case Studies oder Zielgruppen.</p>
         </div>
 
         <div class="tabs-layout reveal">
@@ -1057,8 +1075,8 @@
               <span>Transparente Prozesse bringen Sie nachhaltig weiter und bleiben reproduzierbar.</span>
             </button>
             <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab="1">
-              <strong>Netzwerk</strong>
-              <span>Branchenexperten an Ihrer Seite</span>
+              <strong>Fairness</strong>
+              <span>Individuelle Beratung, zu fairen Preisen – an den Stellen, wo Sie sie brauchen.</span>
             </button>
             <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab="2">
               <strong>Langfristig</strong>
@@ -1068,30 +1086,29 @@
 
           <div class="tab-stage">
             <article class="tab-panel active">
-              <img src="assets/focus-start.jpg" alt="Transparente Prozesse" />
+              <img src="assets/focus-start.jpg" alt="Gründungsidee und Strategie entwickeln" />
               <div class="tab-content">
-                <small>Analyse</small>
-                <h3>Intensives Controlling</h3>
+                <small>Fokus 01</small>
+                <h3>Klare Handlungsempfehlungen.</h3>
                 <p>Eine Analyse und intensives Controlling lassen klare Handlungsempfehlungen und nachvollziehbare Herausforderungen erkennen.</p>
               </div>
             </article>
-                        <article class="tab-panel">
-              <img src="assets/focus-control.jpg" alt="Starkes Netzwerk" />
-              <div class="tab-content">
-                <small>Networking</small>
-                <h3>Starkes Netzwerk.</h3>
-                <p>Werden Sie Teil des Netzwerks, sprechen & arbeiten Sie mit Experten zusammen und profitieren Sie von unzähligen Erfahrungen.</p>
-              </div>
-            </article>
             <article class="tab-panel">
-              <img src="assets/focus-finance.jpg" alt="Faire und Individuelle Beratung" />
+              <img src="assets/focus-finance.jpg" alt="Finanzplanung und Businessplan" />
               <div class="tab-content">
-                <small>Kontinuität</small>
+                <small>Fokus 02</small>
                 <h3>Langfristige Zusammenarbeit.</h3>
                 <p>Eine dauerhafte Begleitung ermöglicht es den Alltag langfristig zu verbessern oder Projekte von Aufbau, über die Umsetzung bis zur Instandhaltung zu betreuen.</p>
               </div>
             </article>
-
+            <article class="tab-panel">
+              <img src="assets/focus-control.jpg" alt="Unternehmerische Steuerung nach der Gründung" />
+              <div class="tab-content">
+                <small>Fokus 03</small>
+                <h3>Starkes Netzwerk.</h3>
+                <p>Werden Sie Teil des Netzwerks, sprechen & arbeiten Sie mit Experten zusammen und profitieren Sie von unzähligen Erfahrungen.</p>
+              </div>
+            </article>
           </div>
         </div>
       </div>
@@ -1102,47 +1119,47 @@
         <div class="section-head reveal">
           <div>
             <div class="kicker">Existenzgründung</div>
-            <h2 id="prozess-title">Gründung eines ambulanten Pflegedienstes</h2>
+            <h2 id="prozess-title">➔ Gründung eines Ambulanten Pflegedienstes </h2>
           </div>
-          <p class="section-text">Beim Scrollen verändert sich Bild und Fokus automatisch mit.</p>
+          <p class="section-text">Die linke Bildfläche bleibt auf Desktop-Geräten stehen. Rechts wechseln die Prozessschritte. Das Bild, der Titel und der Kontext passen sich automatisch an.</p>
         </div>
 
         <div class="process-grid">
           <aside class="showcase-sticky" aria-live="polite">
-            <img id="showcaseImage" src="assets/logo-cadenbach-icon.svg" alt="Analyse & Planung" />
+            <img id="showcaseImage" src="assets/logo-cadenbach-icon.svg" alt="Gründungsidee strukturieren" />
             <div class="showcase-label">
-              <strong id="showcaseTitle">Analyse & Planung</strong>
-              <span id="showcaseText">Im ersten Schritt werden Idee, Motivation und Marktumfeld analysiert.</span>
+              <strong id="showcaseTitle">Idee strukturieren</strong>
+              <span id="showcaseText">Aus einer Vision wird ein klares Beratungsziel.</span>
             </div>
           </aside>
 
           <div class="steps">
-            <article class="step reveal" data-image="assets/Büro.png" data-title="Analyse & Planung" data-text="Im ersten Schritt werden Idee, Motivation und Marktumfeld analysiert.">
-              <small>Phase 1</small>
+            <article class="step reveal" data-image="assets/Büro.png" data-title="Idee strukturieren" data-text="Aus einer Vision wird ein klares Beratungsziel.">
+              <small>Phase 01</small>
               <h3>Analyse & Planung</h3>
-              <p>Im ersten Schritt werden Idee, Motivation, Marktumfeld und wirtschaftliche Annahmen präzise analysiert und in einen Businessplan gegossen.</p>
+              <p>Im ersten Schritt werden Idee, Motivation, Marktumfeld und wirtschaftliche Annahmen präzise analysiert und einen Businessplan gegossen.</p>
             </article>
-            <article class="step reveal" data-image="assets/beratung.png" data-title="Finanzierung & Eröffnung" data-text="Mit Konzept und Plan zur Bank.">
-              <small>Phase 2</small>
+            <article class="step reveal" data-image="assets/beratung.png" data-title="Finanzierung sichern" data-text="Zahlenwerk, Kapitalbedarf und Argumentation werden belastbar.">
+              <small>Phase 02</small>
               <h3>Finanzierung & Eröffnung</h3>
               <p>Mit Konzept und Plan zur Bank und anschließende bestmögliche Vorbereitung Ihrer Eröffnung.</p>
             </article>
-            <article class="step reveal" data-image="assets/vertrag.png" data-title="Existenzfestigung" data-text="Sichern Sie Ihre Existenz mit langfristiger Beratung.">
-              <small>Phase 3</small>
+            <article class="step reveal" data-image="assets/vertrag.png" data-title="Sicher starten" data-text="Die Gründung wird operativ und betriebswirtschaftlich begleitet.">
+              <small>Phase 03</small>
               <h3>Existenzfestigung</h3>
-              <p>Mit den richtigen Werkzeugen und langfristiger Beratung sichern Sie Ihre Existenz und haben stets alles im Blick und immer den gleichen Berater an Ihrer Seite.</p>
+              <p>Mit den richtigen Werkzeugen und langfristiger Beratung sichern Sie Ihre Existenz  und haben stets alles im Blick und immer den gleichen Berater an Ihrer Seite.</p>
             </article>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section white" id="verantwortung">
+    <section class="section white" id="verantwortung" aria-labelledby="verantwortung-title">
       <div class="wrap">
         <div class="section-head reveal">
           <div>
             <div class="kicker">Unsere Werte</div>
-            <h2>Verantwortung</h2>
+            <h2 id="verantwortung-title">Verantwortung</h2>
           </div>
           <p class="section-text" style="max-width: 860px;">
             Mir ist die Verantwortung meiner Generation bewusst. Daher möchte ich auf sozialer und ökologischer Ebene Einfluss nehmen und die Zukunft mitgestalten. Ich heiße jeden Menschen willkommen und versuche durch Effizienz und nachhaltigen Ressourceneinsatz Lösungen zu schaffen, die lange währen. Ich möchte Medienbrüche vermeiden, meine Dienstfahrten immer elektrisch fahren, digital bleiben, wo es möglich ist, und Projekte unterstützen, die echten Einfluss auf unsere Mitmenschen und Umwelt haben.
@@ -1157,15 +1174,15 @@
           <div>
             <div class="kicker">Kontakt</div>
             <h2 id="kontakt-title">Bereit für den nächsten unternehmerischen Schritt?</h2>
-            <p>Nutzen Sie das Formular für ein erstes Kennenlernen.</p>
+            <p>Nutzen Sie das Formular als Platzhalter für ein echtes Kontaktformular, eine Terminbuchung oder eine Verlinkung zu E-Mail, Telefon und Kalender.</p>
           </div>
 
           <form class="contact-form" onsubmit="event.preventDefault(); alert('Danke! Das Formular ist aktuell ein Frontend-Prototyp.');">
             <input class="field" type="text" name="name" placeholder="Name" autocomplete="name" required />
             <input class="field" type="email" name="email" placeholder="E-Mail" autocomplete="email" required />
-            <textarea class="field" name="message" placeholder="Worum geht es bei Ihrer Gründung oder Ihrem Pflegedienst?" required></textarea>
+            <textarea class="field" name="message" placeholder="Worum geht es bei Ihrer Gründung?" required></textarea>
             <button class="btn btn-primary" type="submit">Anfrage senden</button>
-            <div class="form-note">Für den Livebetrieb muss das Formular noch angebunden werden.</div>
+            <div class="form-note">Für den Livebetrieb muss das Formular noch an ein Backend, ein Formular-Tool oder eine E-Mail-Lösung angebunden werden.</div>
           </form>
         </div>
       </div>
@@ -1266,10 +1283,10 @@
     }
 
     const stepObserver = new IntersectionObserver((entries) => {
-      const visible = entries.find((entry) => entry.isIntersecting);
-      if (visible) {
-        setShowcase(visible.target);
-      }
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setShowcase(visible.target);
     }, {
       rootMargin: '-40% 0px -40% 0px',
       threshold: 0
