@@ -303,151 +303,6 @@
 
     .hero-copy { max-width: 790px; }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 34px;
-    }
-
-    .hero-visual {
-      position: relative;
-      min-height: 650px;
-    }
-
-    .visual-card {
-      position: absolute;
-      inset: 0 0 auto auto;
-      width: min(100%, 620px);
-      height: 650px;
-      border-radius: 46px;
-      overflow: hidden;
-      background: var(--navy-800);
-      border: 1px solid rgba(37,59,89,0.13);
-      box-shadow: var(--shadow-strong);
-    }
-
-    .visual-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.74;
-      filter: saturate(0.78) contrast(1.04);
-      transform: scale(1.03);
-    }
-
-    .visual-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(12,23,38,0.02), rgba(12,23,38,0.72)),
-        radial-gradient(circle at 22% 18%, rgba(156,188,217,0.42), transparent 28rem);
-    }
-
-    .compass-orbit {
-      position: absolute;
-      width: 210px;
-      height: 210px;
-      left: 0;
-      top: 54px;
-      display: grid;
-      place-items: center;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.84);
-      border: 1px solid rgba(37,59,89,0.13);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 24px 60px rgba(12,23,38,0.16);
-      animation: float 7s ease-in-out infinite;
-    }
-
-    .compass-orbit::before {
-      content: "";
-      position: absolute;
-      inset: 18px;
-      border-radius: inherit;
-      border: 1px dashed rgba(74,103,140,0.35);
-      animation: spin 18s linear infinite;
-    }
-
-    .compass-orbit img {
-      width: 112px;
-      height: 112px;
-      object-fit: contain;
-      position: relative;
-      z-index: 1;
-    }
-
-    .metric-card {
-      position: absolute;
-      left: 46px;
-      bottom: 42px;
-      width: min(86%, 460px);
-      padding: 26px;
-      border-radius: 30px;
-      background: rgba(12,23,38,0.92);
-      color: var(--paper);
-      border: 1px solid rgba(156,188,217,0.18);
-      box-shadow: 0 28px 64px rgba(12,23,38,0.28);
-    }
-
-    .metric-card strong {
-      display: block;
-      color: var(--blue-250);
-      font-size: clamp(3.1rem, 6vw, 6rem);
-      line-height: 0.86;
-      letter-spacing: -0.09em;
-      margin-bottom: 16px;
-    }
-
-    .metric-card span {
-      display: block;
-      color: var(--muted-light);
-      font-weight: 780;
-      line-height: 1.48;
-    }
-
-    .section {
-      padding: clamp(82px, 12vw, 150px) 0;
-      position: relative;
-    }
-
-    .section.white {
-      background: rgba(255,255,255,0.70);
-      border-top: 1px solid rgba(37,59,89,0.08);
-      border-bottom: 1px solid rgba(37,59,89,0.08);
-    }
-
-    .section.dark {
-      color: var(--paper);
-      background: var(--navy-950);
-      overflow: hidden;
-    }
-
-    .section.dark::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 14% 16%, rgba(156,188,217,0.14), transparent 28rem),
-        radial-gradient(circle at 92% 72%, rgba(74,103,140,0.20), transparent 34rem);
-    }
-
-    .section.dark > .wrap { position: relative; z-index: 1; }
-
-    .section-head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.52fr);
-      gap: clamp(28px, 5vw, 78px);
-      align-items: end;
-      margin-bottom: 48px;
-    }
-
-    .section.dark .kicker { color: var(--blue-250); }
-    .section.dark .kicker::before { border-left-color: var(--blue-250); }
-    .section.dark .section-text { color: var(--muted-light); }
-
     h2 {
       max-width: 1040px;
       margin-bottom: 0;
@@ -458,10 +313,9 @@
       color: inherit;
     }
 
-    /* Saubere 2x2 Rasterdarstellung für die 4 Leistungsblöcke */
     .service-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 24px;
     }
 
@@ -784,6 +638,71 @@
       transform: translateY(0);
     }
 
+    /* Neu: Modal Styles */
+    .footer-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    
+    .footer-btn:hover {
+      color: var(--navy-950);
+    }
+
+    dialog {
+      width: min(800px, 90%);
+      max-height: 80vh;
+      padding: clamp(24px, 4vw, 48px);
+      border: 1px solid rgba(37,59,89,0.12);
+      border-radius: var(--radius-lg);
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: var(--shadow-strong);
+      overflow-y: auto;
+    }
+
+    dialog::backdrop {
+      background: rgba(12, 23, 38, 0.7);
+      backdrop-filter: blur(6px);
+    }
+
+    .dialog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(37,59,89,0.12);
+      padding-bottom: 16px;
+    }
+
+    .dialog-header h2 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .close-btn {
+      background: var(--navy-800);
+      color: var(--white);
+      border: none;
+      border-radius: 99px;
+      width: 36px;
+      height: 36px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform 150ms ease;
+    }
+
+    .close-btn:hover {
+      transform: scale(1.05);
+      background: var(--accent);
+    }
+
     @keyframes float {
       0%, 100% { transform: translateY(0) rotate(-2deg); }
       50% { transform: translateY(-18px) rotate(2deg); }
@@ -909,6 +828,16 @@
         background: linear-gradient(96deg, #F2F2F2, #9CBCD9 54%, #4A678C);
         -webkit-background-clip: text;
         background-clip: text;
+      }
+      
+      dialog {
+        background: var(--navy-950);
+        color: var(--paper);
+        border-color: var(--line);
+      }
+      
+      .dialog-header {
+        border-color: var(--line);
       }
     }
   </style>
@@ -1137,8 +1066,47 @@
 
   <footer class="site-footer">
     <span>© <span id="year"></span> Cadenbach Consulting</span>
-    <span>Impressum · Datenschutz · Kontakt</span>
+    <span>
+      <button class="footer-btn" onclick="document.getElementById('impressumModal').showModal()">Impressum</button> · 
+      <button class="footer-btn" onclick="document.getElementById('datenschutzModal').showModal()">Datenschutz</button> · 
+      <a href="#kontakt">Kontakt</a>
+    </span>
   </footer>
+
+  <!-- Impressum Popup -->
+  <dialog id="impressumModal">
+    <div class="dialog-header">
+      <h2>Impressum</h2>
+      <button class="close-btn" onclick="document.getElementById('impressumModal').close()" aria-label="Schließen">✕</button>
+    </div>
+    <div class="dialog-content">
+      <h3>Angaben gemäß § 5 TMG</h3>
+      <p>Max Mustermann<br>
+      Cadenbach Consulting<br>
+      Musterstraße 1<br>
+      12345 Musterstadt</p>
+      
+      <h3>Kontakt</h3>
+      <p>Telefon: +49 (0) 123 44 55 66<br>
+      E-Mail: info@cadenbach-consulting.de</p>
+      
+      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+      DE999999999</p>
+    </div>
+  </dialog>
+
+  <!-- Datenschutz Popup -->
+  <dialog id="datenschutzModal">
+    <div class="dialog-header">
+      <h2>Datenschutzerklärung</h2>
+      <button class="close-btn" onclick="document.getElementById('datenschutzModal').close()" aria-label="Schließen">✕</button>
+    </div>
+    <div class="dialog-content">
+      <h3>1. Datenschutz auf einen Blick</h3>
+      <p>Allgemeine Hinweise: Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen...</p>
+      <!-- Hier den restlichen Datenschutz-Text einfügen -->
+    </div>
+  </dialog>
 
   <script>
     const header = document.getElementById('siteHeader');
