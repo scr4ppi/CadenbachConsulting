@@ -93,6 +93,24 @@
       transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
     }
 
+    /* Das Zirkel-Linien-Muster passgenau auf der unteren Kante */
+    .site-header::before {
+      content: "";
+      position: absolute;
+      width: min(var(--max), calc(100% - (var(--pad) * 2)));
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, 50%);
+      height: 26px;
+      background-image: url('assets/Bild PNG Farbe.png');
+      background-repeat: space; 
+      background-position: center;
+      background-size: auto 100%;
+      opacity: 0.5;
+      z-index: -1;
+      pointer-events: none;
+    }
+
     .site-header.scrolled {
       background: rgba(242, 242, 242, 0.88);
       border-color: rgba(37, 59, 89, 0.14);
@@ -114,18 +132,23 @@
       gap: 22px;
     }
 
+    /* Logo so positionieren, dass es halb auf der Kante schwebt */
     .brand {
       display: inline-flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 14px;
       min-width: 0;
+      position: relative;
+      z-index: 100;
     }
 
     .brand-logo {
       width: 250px;
-      height: 100px;
+      height: 120px;
       object-fit: contain;
-      filter: drop-shadow(0 12px 26px rgba(12,23,38,0.14));
+      transform: translateY(35px);
+      filter: drop-shadow(0 12px 26px rgba(12,23,38,0.18));
+      transition: transform 220ms ease;
     }
 
     .brand-wordmark {
@@ -345,22 +368,21 @@
         radial-gradient(circle at 22% 18%, rgba(156,188,217,0.42), transparent 28rem);
     }
 
-    /* Das angepasste quadratische und schwebende Cadenbach Logo */
-.compass-orbit {
-  position: absolute;
-  width: 170px;
-  height: 170px;
-  left: 0;
-  top: 54px;
-  display: grid;
-  place-items: center;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.84);
-  border: 1px solid rgba(37,59,89,0.13);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 24px 60px rgba(12,23,38,0.16);
-  animation: float 7s ease-in-out infinite;
-}
+    .compass-orbit {
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      left: 0;
+      top: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.84);
+      border: 1px solid rgba(37,59,89,0.13);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 24px 60px rgba(12,23,38,0.16);
+      animation: float 7s ease-in-out infinite;
+    }
 
     .compass-orbit::before {
       display: none;
@@ -570,7 +592,6 @@
       background: linear-gradient(90deg, rgba(12,23,38,0.95), rgba(12,23,38,0.42));
     }
 
-    /* Korrigierte Positionierung: Text fängt oben im Tab-Fenster an */
     .tab-content {
       position: absolute;
       inset: 0 0 auto 0;
@@ -586,7 +607,6 @@
       text-transform: uppercase;
     }
 
-    /* Korrigierte Farbe: H3 immer weiß, damit es im Dunkelmodus und Lightmodus gut lesbar bleibt */
     .tab-content h3 {
       margin: 16px 0 14px;
       font-family: var(--font-serif);
@@ -829,6 +849,8 @@
       .nav-links a { border-radius: 16px; padding: 14px 16px; }
       .brand-wordmark { display: none; }
       .hero { padding-top: 108px; }
+      /* Angepasster Abstand des Logos im mobilen Menü */
+      .brand-logo { transform: translateY(15px); } 
     }
 
     @media (max-width: 640px) {
@@ -870,6 +892,11 @@
         --line: rgba(156, 188, 217, 0.2); 
       }
 
+      /* Das Background-Pattern im Dark-Mode anpassen (weiß färben und abdimmen) */
+      .site-header::before {
+        filter: invert(1) opacity(0.3); 
+      }
+
       .site-header.scrolled,
       .nav-links,
       .btn-secondary,
@@ -899,7 +926,6 @@
         color: #ffffff;
       }
 
-      /* Logo innerhalb des schwebenden Kastens und Hauptlogo für Dark Mode invertieren */
       .brand-logo,
       .compass-orbit img {
         filter: brightness(0) invert(1);
@@ -911,7 +937,6 @@
         background-clip: text;
       }
 
-      /* KORREKTUR: "Erstgespräch"-Button im Header für den Dark Mode sichtbar machen */
       .header-cta {
         background: var(--blue-250);
         color: var(--navy-950);
