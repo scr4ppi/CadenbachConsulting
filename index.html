@@ -458,9 +458,10 @@
       color: inherit;
     }
 
+    /* Saubere 2x2 Rasterdarstellung für die 4 Leistungsblöcke */
     .service-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
     }
 
@@ -860,7 +861,7 @@
         scroll-behavior: auto !important;
         transition-duration: 0.001ms !important;
       }
-    } /* Fehler behoben: Geschlossene Klammer eingefügt */
+    }
 
     @media (prefers-color-scheme: dark) {
       :root {
@@ -916,7 +917,7 @@
 <body>
   <div class="progress" id="progress"></div>
 
-   <header class="site-header" id="siteHeader">
+  <header class="site-header" id="siteHeader">
     <nav class="nav" aria-label="Hauptnavigation">
       <a class="brand" href="#top" aria-label="Cadenbach Consulting Startseite">
         <img class="brand-logo" src="assets/logobreit.png" alt="Cadenbach Consulting Logo" />
@@ -1228,13 +1229,13 @@
     }
 
     const stepObserver = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible) setShowcase(visible.target);
+      const visible = entries.find((entry) => entry.isIntersecting);
+      if (visible) {
+        setShowcase(visible.target);
+      }
     }, {
-      rootMargin: '-30% 0px -40% 0px',
-      threshold: [0.2, 0.45, 0.7]
+      rootMargin: '-40% 0px -40% 0px',
+      threshold: 0
     });
 
     steps.forEach((step) => stepObserver.observe(step));
