@@ -360,7 +360,8 @@
       line-height: 1.68;
     }
 
-.tabs-layout {
+    /* Hier wurde der Abstand und die Spaltenbreite optimiert */
+    .tabs-layout {
       display: grid;
       grid-template-columns: minmax(240px, 0.32fr) minmax(0, 1fr);
       gap: 20px;
@@ -442,6 +443,21 @@
       font-weight: 950;
       letter-spacing: 0.13em;
       text-transform: uppercase;
+    }
+
+    .tab-content h3 {
+      margin: 16px 0 14px;
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4.2vw, 4.3rem);
+      line-height: 1;
+      letter-spacing: -0.064em;
+    }
+
+    .tab-content p {
+      margin-bottom: 0;
+      color: var(--muted-light);
+      line-height: 1.72;
+      font-size: 1.06rem;
     }
 
     .process-grid {
@@ -750,7 +766,6 @@
         background-clip: text;
       }
 
-      /* Korrekte Anpassung für den "Erstgespräch"-Button im Dark Mode */
       .header-cta {
         background: var(--blue-250);
         color: var(--navy-950);
@@ -1080,13 +1095,13 @@
     }
 
     const stepObserver = new IntersectionObserver((entries) => {
-      const visible = entries.find((entry) => entry.isIntersecting);
-      if (visible) {
-        setShowcase(visible.target);
-      }
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setShowcase(visible.target);
     }, {
-      rootMargin: '-40% 0px -40% 0px',
-      threshold: 0
+      rootMargin: '-30% 0px -40% 0px',
+      threshold: [0.2, 0.45, 0.7]
     });
 
     steps.forEach((step) => stepObserver.observe(step));
