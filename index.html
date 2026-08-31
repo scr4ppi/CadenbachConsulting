@@ -790,6 +790,16 @@
       font-size: 0.92rem;
     }
 
+    .footer-links a {
+      color: var(--blue-650);
+      text-decoration: none;
+      transition: color 160ms ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--navy-950);
+    }
+
     .reveal {
       opacity: 0;
       transform: translateY(28px);
@@ -889,6 +899,13 @@
         --muted: #9CBCD9; 
         --muted-light: #F2F2F2;
         --line: rgba(156, 188, 217, 0.2); 
+        .footer-links a {
+        color: #ffffff;
+      }
+      
+      .footer-links a:hover {
+        color: var(--blue-250);
+      }
       }
 
       /* Das Background-Pattern im Dark-Mode anpassen (weiß färben und abdimmen) */
@@ -1223,9 +1240,13 @@
     </section>
   </main>
 
-  <footer class="site-footer">
+<footer class="site-footer">
     <span>© <span id="year"></span> Cadenbach Consulting</span>
-    <span>Impressum · Datenschutz · Kontakt</span>
+    <span class="footer-links">
+      <a href="impressum.html">Impressum</a> · 
+      <a href="datenschutz.html">Datenschutz</a> · 
+      <a href="#kontakt">Kontakt</a>
+    </span>
   </footer>
 
   <script>
