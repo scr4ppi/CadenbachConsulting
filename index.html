@@ -901,6 +901,20 @@
         --line: rgba(156, 188, 217, 0.2); 
         .footer-links a {
         color: #ffffff;
+          .legal-modal {
+        background: var(--navy-800);
+        border-color: rgba(156,188,217,0.15);
+      }
+      .modal-header {
+        background: rgba(12,23,38,0.4);
+        border-bottom-color: rgba(156,188,217,0.1);
+      }
+      .modal-content {
+        color: var(--muted-light);
+      }
+      .close-modal {
+        color: var(--muted-light);
+      }
       }
       
       .footer-links a:hover {
@@ -1005,6 +1019,68 @@
         width: 54px;
         height: 54px;
       }
+
+      /* --- Popups (Modals) für Rechtstexte --- */
+    .legal-modal {
+      width: 90%;
+      max-width: 700px;
+      max-height: 80vh;
+      margin: auto;
+      padding: 0;
+      border: 1px solid rgba(37,59,89,0.12);
+      border-radius: var(--radius-xl);
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: var(--shadow-strong);
+      overflow: hidden;
+    }
+
+    /* Der abgedunkelte Hintergrund */
+    .legal-modal::backdrop {
+      background: rgba(12, 23, 38, 0.6);
+      backdrop-filter: blur(6px);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 32px;
+      border-bottom: 1px solid rgba(37,59,89,0.08);
+      background: rgba(255,255,255,0.4);
+    }
+
+    .modal-header h2 {
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 150ms ease;
+    }
+
+    .close-modal:hover {
+      color: var(--accent);
+    }
+
+    .modal-content {
+      padding: 32px;
+      overflow-y: auto;
+      max-height: calc(80vh - 90px);
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* WICHTIG: Cursor für die neuen Footer-Links anpassen */
+    .footer-links a {
+      cursor: pointer; 
+    }
     }
     }
   </style>
@@ -1243,11 +1319,39 @@
 <footer class="site-footer">
     <span>© <span id="year"></span> Cadenbach Consulting</span>
     <span class="footer-links">
-      <a href="impressum.html">Impressum</a> · 
-      <a href="datenschutz.html">Datenschutz</a> · 
+      <a onclick="document.getElementById('modal-impressum').showModal()">Impressum</a> · 
+      <a onclick="document.getElementById('modal-datenschutz').showModal()">Datenschutz</a> · 
       <a href="#kontakt">Kontakt</a>
     </span>
   </footer>
+
+  <!-- Popup: Impressum -->
+  <dialog id="modal-impressum" class="legal-modal">
+    <div class="modal-header">
+      <h2>Impressum</h2>
+      <button class="close-modal" onclick="document.getElementById('modal-impressum').close()">×</button>
+    </div>
+    <div class="modal-content">
+      <p><strong>Angaben gemäß § 5 TMG:</strong></p>
+      <p>Cadenbach Consulting<br>Musterstraße 1<br>12345 Musterstadt</p>
+      <p><strong>Vertreten durch:</strong><br>Max Mustermann</p>
+      <p><strong>Kontakt:</strong><br>Telefon: +49 (0) 123 44 55 66<br>E-Mail: info@cadenbach-consulting.de</p>
+      <!-- Hier deinen echten Text einfügen -->
+    </div>
+  </dialog>
+
+  <!-- Popup: Datenschutz -->
+  <dialog id="modal-datenschutz" class="legal-modal">
+    <div class="modal-header">
+      <h2>Datenschutz</h2>
+      <button class="close-modal" onclick="document.getElementById('modal-datenschutz').close()">×</button>
+    </div>
+    <div class="modal-content">
+      <p><strong>1. Datenschutz auf einen Blick</strong></p>
+      <p>Allgemeine Hinweise: Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen...</p>
+      <!-- Hier deinen echten Text einfügen -->
+    </div>
+  </dialog>
 
   <script>
     const waButton = document.getElementById('waButton');
