@@ -1297,7 +1297,7 @@
             <p>Nutzen Sie das Formular für ein erstes Kennenlernen.</p>
           </div>
 
-          <form class="contact-form" onsubmit="event.preventDefault(); alert('Danke! Das Formular ist aktuell ein Frontend-Prototyp.');">
+         <form class="contact-form" action="mail.php" method="POST">
             <input class="field" type="text" name="name" placeholder="Name" autocomplete="name" required />
             <input class="field" type="email" name="email" placeholder="E-Mail" autocomplete="email" required />
             <textarea class="field" name="message" placeholder="Worum geht es bei Ihrer Gründung oder Ihrem Pflegedienst?" required></textarea>
@@ -1461,6 +1461,16 @@
         });
         tabPanels.forEach((panel, i) => panel.classList.toggle('active', i === index));
       });
+
+      // Erfolgsmeldung prüfen
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('status') === 'erfolg') {
+        alert('Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Ich melde mich in Kürze bei Ihnen.');
+        // Entfernt den Zusatz "?status=erfolg" wieder aus der Adresszeile
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    });
     });
   </script>
 </body>
